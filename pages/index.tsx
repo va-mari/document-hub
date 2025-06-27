@@ -16,25 +16,29 @@ export default function Home() {
   const fileInputRef = useRef<HTMLInputElement | null>(null)
 
   const checklistItems: ChecklistItem[] = [
-    { id: 1, label: 'Loan Application' },
-    { id: 2, label: 'Comps' },
-    { id: 3, label: 'Tax Summary' },
-    { id: 4, label: 'Entity Docs' },
-    { id: 5, label: 'CPL' },
-    { id: 6, label: 'Budget' },
-    { id: 7, label: 'Payoff' },
-    { id: 8, label: 'Purchase Contract' },
-    { id: 9, label: 'Photos' },
-    { id: 10, label: 'Property Insurance' },
-    { id: 11, label: 'Loan Closing Math Sheet' },
-    { id: 12, label: 'Loan Documents' },
-    { id: 13, label: 'Wire Instructions' },
-    { id: 14, label: 'Recorded Loan Documents' },
-    { id: 24, label: 'Recorded DOT' },
-    { id: 24, label: 'Recorded Assignment' },
-    { id: 24, label: 'Recorded Loan Mod.' },
-    { id: 99, label: 'Extra Uploads' }
-  ]
+  { id: 1, label: 'Loan Application' },
+  { id: 2, label: 'CompDetailedReport' },
+  { id: 3, label: 'Tax Summary Report' },
+  { id: 4, label: 'Entity Documents' },
+  { id: 5, label: 'Title Commitment' },
+  { id: 6, label: 'Closing Protection Letter' },
+  { id: 8, label: 'Budget' },
+  { id: 9, label: 'Payoff' },
+  { id: 10, label: 'Purchase Contract' },
+  { id: 11, label: 'Photos' },
+  { id: 14, label: 'Property Insurance' },
+  { id: 15, label: 'Loan Closing Math Sheet' },
+  { id: 16, label: 'Loan Documents' },
+  { id: 17, label: 'Wire Instructions' },
+  { id: 18, label: 'Executed Loan Documents' },
+  { id: 19, label: 'Final Settlement Statement' },
+  { id: 20, label: 'Loan Servicing Agreement' },
+  { id: 24, label: 'Recorded DOT' },
+  { id: 24, label: 'Recorded Assignment' },
+  { id: 24, label: 'Recorded Loan Mod' },
+  { id: 99, label: 'Extra Uploads' } // Arbitrary unique ID
+]
+
 
   const filteredItems = checklistItems.filter((item) =>
     `${item.id} ${item.label}`.toLowerCase().includes(searchTerm.toLowerCase())
