@@ -1,6 +1,7 @@
 // pages/api/upload.ts
 import type { NextApiRequest, NextApiResponse } from 'next'
-import dbx from '@/utils/dropboxClient'
+import dbx from '@/utils/dropbox'
+
 
 export const config = {
   api: {
