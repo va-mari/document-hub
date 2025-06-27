@@ -67,12 +67,28 @@ export default function Home() {
   }
 
   const selectedItem = checklistItems.find((item) => item.id === selectedItemId)
+   const handleTestUpload = async () => {
+  const response = await fetch('/api/uploadTestFile', {
+    method: 'POST',
+  });
+
+  const data = await response.json();
+  alert(data.message);
+};
 
   return (
     <>
       <Head>
         <title>Document Hub Uploader</title>
       </Head>
+        <button
+          onClick={handleTestUpload}
+          className="mb-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+        >
+          Upload Test File to Dropbox
+         </button>
+
+      
       <main className="min-h-screen bg-gray-50 p-8 font-sans">
         <div className="flex max-w-6xl mx-auto gap-6">
           {/* Left Panel */}
