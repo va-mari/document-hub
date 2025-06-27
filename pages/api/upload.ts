@@ -1,7 +1,6 @@
 // pages/api/upload.ts
 import type { NextApiRequest, NextApiResponse } from 'next'
-import dbx from '@/utils/dropbox'
-
+import { dbx } from '@/utils/dropbox' // Corrected import for named export
 
 export const config = {
   api: {
@@ -28,7 +27,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     await dbx.filesUpload({
       path: `${dropboxPath}/${fileName}`,
       contents: fileBuffer,
-      mode: { '.tag': 'add' }, // or 'overwrite'
+      mode: { '.tag': 'add' }, // Change to 'overwrite' if needed
     })
 
     res.status(200).json({ message: 'File uploaded to Dropbox!' })
