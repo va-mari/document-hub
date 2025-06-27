@@ -16,33 +16,31 @@ export default function Home() {
   const fileInputRef = useRef<HTMLInputElement | null>(null)
 
   const checklistItems: ChecklistItem[] = [
-  { id: 1, label: 'Loan Application' },
-  { id: 2, label: 'CompDetailedReport' },
-  { id: 3, label: 'Tax Summary Report' },
-  { id: 4, label: 'Entity Documents' },
-  { id: 5, label: 'Title Commitment' },
-  { id: 6, label: 'Closing Protection Letter' },
-  { id: 8, label: 'Budget' },
-  { id: 9, label: 'Payoff' },
-  { id: 10, label: 'Purchase Contract' },
-  { id: 11, label: 'Photos' },
-  { id: 14, label: 'Property Insurance' },
-  { id: 15, label: 'Loan Closing Math Sheet' },
-  { id: 16, label: 'Loan Documents' },
-  { id: 17, label: 'Wire Instructions' },
-  { id: 18, label: 'Executed Loan Documents' },
-  { id: 19, label: 'Final Settlement Statement' },
-  { id: 20, label: 'Loan Servicing Agreement' },
-  { id: 24, label: 'Recorded DOT' },
-  { id: 24, label: 'Recorded Assignment' },
-  { id: 24, label: 'Recorded Loan Mod' },
-  { id: 99, label: 'Extra Uploads' } // Arbitrary unique ID
-]
-
+    { id: 1, label: 'Loan Application' },
+    { id: 2, label: 'CompDetailedReport' },
+    { id: 3, label: 'Tax Summary Report' },
+    { id: 4, label: 'Entity Documents' },
+    { id: 5, label: 'Title Commitment' },
+    { id: 6, label: 'Closing Protection Letter' },
+    { id: 8, label: 'Budget' },
+    { id: 9, label: 'Payoff' },
+    { id: 10, label: 'Purchase Contract' },
+    { id: 11, label: 'Photos' },
+    { id: 14, label: 'Property Insurance' },
+    { id: 15, label: 'Loan Closing Math Sheet' },
+    { id: 16, label: 'Loan Documents' },
+    { id: 17, label: 'Wire Instructions' },
+    { id: 18, label: 'Executed Loan Documents' },
+    { id: 19, label: 'Final Settlement Statement' },
+    { id: 20, label: 'Loan Servicing Agreement' },
+    { id: 24, label: 'Recorded DOT' },
+    { id: 24, label: 'Recorded Assignment' },
+    { id: 24, label: 'Recorded Loan Mod' },
+    { id: 99, label: 'Extra Uploads' }
+  ]
 
   const filteredItems = checklistItems.filter((item) =>
-    `$<span className="tabular-nums">{item.id}</span>&nbsp;<span className="ml-1">{item.label}</span>
-`.toLowerCase().includes(searchTerm.toLowerCase())
+    `${item.id} ${item.label}`.toLowerCase().includes(searchTerm.toLowerCase())
   )
 
   const handleFileDrop = (e: React.DragEvent<HTMLDivElement>) => {
@@ -103,7 +101,9 @@ export default function Home() {
             <ul className="text-sm divide-y divide-gray-200">
               {filteredItems.map((item) => (
                 <li key={`${item.label}-${item.id}`} className="py-1.5 grid grid-cols-3 gap-2 items-center">
-                  <div className="text-gray-500 text-xs">{item.id}</div>
+                  <div className="flex items-center text-gray-500 text-xs whitespace-nowrap">
+                    <span className="mr-1">#{item.id}</span>
+                  </div>
                   <div
                     onClick={() => setSelectedItemId(item.id)}
                     className={`cursor-pointer select-none px-2 py-1 rounded-md ${
