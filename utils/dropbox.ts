@@ -29,3 +29,5 @@ export async function uploadToDropbox(path: string, file: File | Blob) {
     throw error
   }
 }
+
+export { dbx } // ✅ this is the missing piece
