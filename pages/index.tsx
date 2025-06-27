@@ -6,7 +6,6 @@ import { useState, useRef } from 'react'
 type ChecklistItem = {
   id: number
   label: string
-  icon?: string
 }
 
 export default function Home() {
@@ -17,30 +16,28 @@ export default function Home() {
   const fileInputRef = useRef<HTMLInputElement | null>(null)
 
   const checklistItems: ChecklistItem[] = [
-    { id: 1, label: 'Loan Application', icon: '📝' },
-    { id: 2, label: 'CompDetailedReport', icon: '📊' },
-    { id: 3, label: 'Tax Summary Report', icon: '📑' },
-    { id: 4, label: 'Entity Documents', icon: '🏢' },
-    { id: 5, label: 'Title Commitment', icon: '📃' },
-    { id: 6, label: 'CPL', icon: '🛡️' },
-    { id: 8, label: 'Budget', icon: '💰' },
-    { id: 9, label: 'Payoff', icon: '✅' },
-    { id: 10, label: 'Purchase Contract', icon: '🛒' },
-    { id: 11, label: 'Photos', icon: '📷' },
-    { id: 14, label: 'Property Insurance', icon: '🏠' },
-    { id: 15, label: 'Loan Closing Math Sheet', icon: '🧮' },
-    { id: 16, label: 'Loan Documents', icon: '📁' },
-    { id: 17, label: 'Wire Instructions', icon: '💸' },
-    { id: 18, label: 'Executed Loan Documents', icon: '✍️' },
-    { id: 19, label: 'Final Settlement Statement', icon: '📜' },
-    { id: 20, label: 'Loan Servicing Agreement', icon: '🔏' },
-    { id: 24, label: 'Recorded DOT', icon: '🗂️' },
-    { id: 24, label: 'Recorded Assignment', icon: '📎' },
-    { id: 24, label: 'Recorded Loan Mod.', icon: '🔧' }
+    { id: 1, label: 'Loan Application' },
+    { id: 2, label: 'Comps' },
+    { id: 3, label: 'Tax Summary' },
+    { id: 4, label: 'Entity Docs' },
+    { id: 5, label: 'CPL' },
+    { id: 6, label: 'Budget' },
+    { id: 7, label: 'Payoff' },
+    { id: 8, label: 'Purchase Contract' },
+    { id: 9, label: 'Photos' },
+    { id: 10, label: 'Property Insurance' },
+    { id: 11, label: 'Loan Closing Math Sheet' },
+    { id: 12, label: 'Loan Documents' },
+    { id: 13, label: 'Wire Instructions' },
+    { id: 14, label: 'Recorded Loan Documents' },
+    { id: 24, label: 'Recorded DOT' },
+    { id: 24, label: 'Recorded Assignment' },
+    { id: 24, label: 'Recorded Loan Mod.' },
+    { id: 99, label: 'Extra Uploads' }
   ]
 
   const filteredItems = checklistItems.filter((item) =>
-    `${item.id} - ${item.label}`.toLowerCase().includes(searchTerm.toLowerCase())
+    `${item.id} ${item.label}`.toLowerCase().includes(searchTerm.toLowerCase())
   )
 
   const handleFileDrop = (e: React.DragEvent<HTMLDivElement>) => {
@@ -71,75 +68,69 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Document Hub</title>
+        <title>Document Hub Uploader</title>
       </Head>
-      <main className="flex h-screen bg-gray-50 text-gray-800">
-        {/* Sidebar */}
-        <aside className="w-80 bg-white border-r border-gray-200 p-5 overflow-y-auto shadow-sm">
-          <h2 className="text-2xl font-bold mb-4">📋 Checklist</h2>
-          <input
-            type="text"
-            placeholder="Search..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full mb-5 px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-300"
-          />
-          <ul className="space-y-4 text-sm">
-            {filteredItems.map((item, index) => (
-              <li key={`${item.id}-${index}`}>
-                <div
-                  onClick={() => setSelectedItemId(item.id)}
-                  className={`flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer transition ${
-                    selectedItemId === item.id
-                      ? 'bg-blue-100 text-blue-800 font-semibold'
-                      : 'hover:bg-gray-100'
-                  }`}
-                >
-                  <span className="text-lg">{item.icon}</span>
-                  <span>{item.id} - {item.label}</span>
-                </div>
+      <main className="min-h-screen bg-gray-50 p-8 font-sans">
+        <div className="flex max-w-6xl mx-auto gap-6">
+          {/* Left Panel */}
+          <aside className="w-[380px] bg-white border rounded-lg shadow-sm p-4">
+            <h1 className="text-xl font-semibold mb-4 flex items-center gap-2">
+              📁 Document Hub Uploader
+            </h1>
 
-                {/* Uploaded Files */}
-                {uploadedFiles[item.id]?.length > 0 && (
-                  <ul className="ml-8 mt-1 text-xs text-gray-600 space-y-1">
-                    {uploadedFiles[item.id].map((file, i) => (
-                      <li key={i} className="truncate">• {file.name}</li>
-                    ))}
-                  </ul>
-                )}
+            <h2 className="text-sm font-semibold mb-2">✅ Checklist for 1334 N Main St</h2>
 
-                {/* Remarks Input */}
-                <div className="ml-8 mt-2">
-                  <label htmlFor={`remarks-${item.id}`} className="block text-xs text-gray-500 mb-1">
-                    Remarks
-                  </label>
+            {/* Search Bar */}
+            <input
+              type="text"
+              placeholder="Search checklist..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full mb-3 px-3 py-1.5 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-400"
+            />
+
+            <div className="text-xs font-medium text-gray-400 uppercase border-b pb-1 mb-2 grid grid-cols-3 gap-2">
+              <div>#</div>
+              <div className="col-span-1">Document Type</div>
+              <div className="text-right">Remarks</div>
+            </div>
+
+            <ul className="text-sm divide-y divide-gray-200">
+              {filteredItems.map((item) => (
+                <li key={`${item.label}-${item.id}`} className="py-1.5 grid grid-cols-3 gap-2 items-center">
+                  <div className="text-gray-500 text-xs">{item.id}</div>
+                  <div
+                    onClick={() => setSelectedItemId(item.id)}
+                    className={`cursor-pointer select-none px-2 py-1 rounded-md ${
+                      selectedItemId === item.id
+                        ? 'bg-blue-50 text-blue-600 font-semibold'
+                        : 'hover:bg-gray-100 text-gray-800'
+                    }`}
+                  >
+                    {item.label}
+                  </div>
                   <input
                     type="text"
-                    id={`remarks-${item.id}`}
+                    placeholder="Add remark"
                     value={remarks[item.id] || ''}
                     onChange={(e) =>
                       setRemarks((prev) => ({ ...prev, [item.id]: e.target.value }))
                     }
-                    placeholder="Add notes..."
-                    className="w-full text-xs px-2 py-1 border border-gray-300 rounded"
+                    className="text-xs px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-400"
                   />
-                </div>
-              </li>
-            ))}
-          </ul>
-        </aside>
+                </li>
+              ))}
+            </ul>
+          </aside>
 
-        {/* Main Content */}
-        <section className="flex-1 p-10 flex flex-col">
-          <h1 className="text-3xl font-bold mb-6">📁 Document Hub</h1>
-
-          <div
-            className="flex-1 flex items-center justify-center"
-            onDrop={handleFileDrop}
-            onDragOver={(e) => e.preventDefault()}
-            onClick={triggerFileInput}
-          >
-            <div className="w-full max-w-2xl border-4 border-dashed border-gray-300 rounded-xl bg-white p-10 text-center text-gray-500 hover:bg-gray-50 transition cursor-pointer">
+          {/* Upload Area */}
+          <section className="flex-1 bg-white border rounded-lg shadow-sm flex items-center justify-center p-8">
+            <div
+              onDrop={handleFileDrop}
+              onDragOver={(e) => e.preventDefault()}
+              onClick={triggerFileInput}
+              className="border-2 border-dashed border-gray-300 rounded-lg w-full h-64 flex flex-col items-center justify-center text-gray-500 hover:bg-gray-50 transition cursor-pointer"
+            >
               <input
                 type="file"
                 multiple
@@ -147,37 +138,15 @@ export default function Home() {
                 onChange={handleFileChange}
                 className="hidden"
               />
-              {selectedItem ? (
-                <p>
-                  Drop or click to upload files for{' '}
-                  <span className="font-semibold text-gray-800">
-                    {selectedItem.id} - {selectedItem.label}
-                  </span>
-                </p>
-              ) : (
-                <p>Select a checklist item to begin uploading</p>
-              )}
+              <div className="text-4xl mb-2">📂</div>
+              <p className="text-sm">
+                {selectedItem
+                  ? `Drop or click to upload for: ${selectedItem.label}`
+                  : 'Drag and drop files here'}
+              </p>
             </div>
-          </div>
-
-          {selectedItemId && uploadedFiles[selectedItemId]?.length > 0 && (
-            <div className="mt-10">
-              <h2 className="text-xl font-semibold mb-2">
-                Uploaded files for {selectedItem?.id} - {selectedItem?.label}
-              </h2>
-              <ul className="bg-white rounded-md shadow divide-y divide-gray-200">
-                {uploadedFiles[selectedItemId].map((file, index) => (
-                  <li key={index} className="flex items-center justify-between p-3">
-                    <span className="text-sm">{file.name}</span>
-                    <span className="text-xs text-gray-500">
-                      {(file.size / 1024).toFixed(1)} KB
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </section>
+          </section>
+        </div>
       </main>
     </>
   )
