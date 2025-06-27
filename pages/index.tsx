@@ -34,8 +34,8 @@ export default function Home() {
     { id: 19, label: 'Final Settlement Statement' },
     { id: 20, label: 'Loan Servicing Agreement' },
     { id: 24, label: 'Recorded DOT' },
-    { id: 25, label: 'Recorded Assignment' },
-    { id: 26, label: 'Recorded Loan Mod.' }
+    { id: 24, label: 'Recorded Assignment' },
+    { id: 24, label: 'Recorded Loan Mod.' }
   ]
 
   const filteredItems = checklistItems.filter((item) =>
@@ -84,8 +84,8 @@ export default function Home() {
             className="w-full mb-4 px-3 py-2 border border-gray-300 rounded"
           />
           <ul className="space-y-4">
-            {filteredItems.map((item) => (
-              <li key={item.id}>
+            {filteredItems.map((item, index) => (
+              <li key={`${item.id}-${index}`}>
                 <div
                   onClick={() => setSelectedItemId(item.id)}
                   className={`cursor-pointer px-3 py-2 rounded hover:bg-gray-200 ${
@@ -106,12 +106,12 @@ export default function Home() {
 
                 {/* Remarks Input */}
                 <div className="ml-4 mt-2">
-                  <label htmlFor={`remarks-${item.id}`} className="block text-xs font-medium text-gray-500 mb-1">
+                  <label htmlFor={`remarks-${item.id}-${index}`} className="block text-xs font-medium text-gray-500 mb-1">
                     Remarks
                   </label>
                   <input
                     type="text"
-                    id={`remarks-${item.id}`}
+                    id={`remarks-${item.id}-${index}`}
                     value={remarks[item.id] || ''}
                     onChange={(e) =>
                       setRemarks((prev) => ({ ...prev, [item.id]: e.target.value }))
