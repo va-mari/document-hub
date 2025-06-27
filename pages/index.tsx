@@ -83,7 +83,6 @@ export default function Home() {
 
             <h2 className="text-sm font-semibold mb-2">✅ Checklist for 1334 N Main St</h2>
 
-            {/* Search Bar */}
             <input
               type="text"
               placeholder="Search checklist..."
@@ -92,21 +91,19 @@ export default function Home() {
               className="w-full mb-3 px-3 py-1.5 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-400"
             />
 
-            <div className="text-xs font-medium text-gray-400 uppercase border-b pb-1 mb-2 grid grid-cols-3 gap-2">
+            <div className="text-xs font-medium text-gray-400 uppercase border-b pb-1 mb-2 grid grid-cols-[28px_1fr_100px] gap-1">
               <div>#</div>
-              <div className="col-span-1">Document Type</div>
+              <div>Document Type</div>
               <div className="text-right">Remarks</div>
             </div>
 
             <ul className="text-sm divide-y divide-gray-200">
-              {filteredItems.map((item) => (
-                <li key={`${item.label}-${item.id}`} className="py-1.5 grid grid-cols-3 gap-2 items-center">
-                  <div className="flex items-center text-gray-500 text-xs whitespace-nowrap">
-                    <span className="mr-1">#{item.id}</span>
-                  </div>
+              {filteredItems.map((item, idx) => (
+                <li key={`${item.label}-${idx}`} className="py-1.5 grid grid-cols-[28px_1fr_100px] gap-1 items-center">
+                  <div className="text-gray-500 text-xs">#{item.id}</div>
                   <div
                     onClick={() => setSelectedItemId(item.id)}
-                    className={`cursor-pointer select-none px-2 py-1 rounded-md ${
+                    className={`cursor-pointer select-none px-2 py-1 rounded-md break-words ${
                       selectedItemId === item.id
                         ? 'bg-blue-50 text-blue-600 font-semibold'
                         : 'hover:bg-gray-100 text-gray-800'
@@ -134,7 +131,7 @@ export default function Home() {
               onDrop={handleFileDrop}
               onDragOver={(e) => e.preventDefault()}
               onClick={triggerFileInput}
-              className="border-2 border-dashed border-gray-300 rounded-lg w-full h-64 flex flex-col items-center justify-center text-gray-500 hover:bg-gray-50 transition cursor-pointer"
+              className="border-2 border-dashed border-gray-300 rounded-lg w-full h-56 flex flex-col items-center justify-center text-gray-500 hover:bg-gray-50 transition cursor-pointer"
             >
               <input
                 type="file"
@@ -143,11 +140,11 @@ export default function Home() {
                 onChange={handleFileChange}
                 className="hidden"
               />
-              <div className="text-4xl mb-2">📂</div>
-              <p className="text-sm">
+              <div className="text-4xl mb-1">📂</div>
+              <p className="text-sm text-center max-w-sm">
                 {selectedItem
                   ? `Drop or click to upload for: ${selectedItem.label}`
-                  : 'Drag and drop files here'}
+                  : 'Drag and drop files here or click to upload'}
               </p>
             </div>
           </section>
