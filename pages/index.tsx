@@ -41,7 +41,8 @@ export default function Home() {
 
 
   const filteredItems = checklistItems.filter((item) =>
-    `${item.id} ${item.label}`.toLowerCase().includes(searchTerm.toLowerCase())
+    `$<span className="tabular-nums">{item.id}</span>&nbsp;<span className="ml-1">{item.label}</span>
+`.toLowerCase().includes(searchTerm.toLowerCase())
   )
 
   const handleFileDrop = (e: React.DragEvent<HTMLDivElement>) => {
